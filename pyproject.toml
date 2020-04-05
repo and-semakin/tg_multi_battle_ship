@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "tg_multi_battle_ship"
+version = "0.1.0"
+description = "Telegram bot for playing battle ships game to several people"
+authors = ["Andrey Semakin <and-semakin@ya.ru>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+[tool.poetry.dev-dependencies]
+black = "^19.10b0"
+isort = "^4.3.21"
+flake8 = "^3.7.9"
+mypy = "^0.770"
+pre-commit = "^2.2.0"
+pytest = "^5.4.1"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
