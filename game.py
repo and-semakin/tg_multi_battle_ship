@@ -1,6 +1,7 @@
 import itertools
 import random
 import re
+from dataclasses import dataclass
 from enum import Enum
 from typing import Dict, Iterable, List, Tuple, cast
 
@@ -22,10 +23,10 @@ LETTERS = "абвгдежзик"
 POSITION_PATTERN = r"[" + LETTERS + r"]{1}\d{1,2}"
 
 
+@dataclass
 class Player:
-    def __init__(self, id: str, name: str = "Nameless") -> None:
-        self.id = id
-        self.name = name
+    id: str
+    name: str = "Nameless"
 
 
 class Game:
