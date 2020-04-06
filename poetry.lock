@@ -339,6 +339,17 @@ checkqa-mypy = ["mypy (v0.761)"]
 testing = ["argcomplete", "hypothesis (>=3.56)", "mock", "nose", "requests", "xmlschema"]
 
 [[package]]
+category = "main"
+description = "Add .env support to your django/flask apps in development and deployments"
+name = "python-dotenv"
+optional = false
+python-versions = "*"
+version = "0.12.0"
+
+[package.extras]
+cli = ["click (>=5.0)"]
+
+[[package]]
 category = "dev"
 description = "YAML parser and emitter for Python"
 name = "pyyaml"
@@ -444,7 +455,7 @@ python-versions = "*"
 version = "0.1.9"
 
 [metadata]
-content-hash = "debb14aef6ff3ec379b70b072e1a8c53b84c6e8ec58bc64be1163746feb652a3"
+content-hash = "317a8fc496d003bb69aacab9d969824e2a43e2872b50865299db22c253ed08b9"
 python-versions = "^3.8"
 
 [metadata.files]
@@ -596,6 +607,10 @@ pytelegrambotapi = [
 pytest = [
     {file = "pytest-5.4.1-py3-none-any.whl", hash = "sha256:0e5b30f5cb04e887b91b1ee519fa3d89049595f428c1db76e73bd7f17b09b172"},
     {file = "pytest-5.4.1.tar.gz", hash = "sha256:84dde37075b8805f3d1f392cc47e38a0e59518fb46a431cfdaf7cf1ce805f970"},
+]
+python-dotenv = [
+    {file = "python-dotenv-0.12.0.tar.gz", hash = "sha256:92b3123fb2d58a284f76cc92bfe4ee6c502c32ded73e8b051c4f6afc8b6751ed"},
+    {file = "python_dotenv-0.12.0-py2.py3-none-any.whl", hash = "sha256:81822227f771e0cab235a2939f0f265954ac4763cafd806d845801c863bf372f"},
 ]
 pyyaml = [
     {file = "PyYAML-5.3.1-cp27-cp27m-win32.whl", hash = "sha256:74809a57b329d6cc0fdccee6318f44b9b8649961fa73144a98735b0aaf029f1f"},
