@@ -70,7 +70,7 @@ class GameMaster:
         if not game.started:
             raise GameMasterError("Game is not started yet")
 
-        attacker, expected_victim, position = self._moves[game_id]
+        attacker, expected_victim, position = self._moves.pop(game_id)
 
         if game.current_move[1] != victim or expected_victim != victim:
             raise GameMasterError("It's not your turn")
