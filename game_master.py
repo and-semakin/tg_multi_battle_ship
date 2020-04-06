@@ -24,11 +24,11 @@ class GameMaster:
         self._moves.pop(game_id, None)
         self._players.pop(game_id, None)
 
-    def add_player(self, game_id: str, id: str, name: str) -> None:
+    def add_player(self, game_id: str, player: Player) -> None:
         if game_id not in self.games:
             raise GameMasterError("Game doesn't exist")
 
-        self._players.setdefault(game_id, []).append(Player(id, name))
+        self._players.setdefault(game_id, []).append(player)
 
     def start_game(self, game_id: str) -> None:
         if game_id not in self.games:
