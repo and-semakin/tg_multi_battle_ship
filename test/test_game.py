@@ -1,6 +1,6 @@
 import pytest
 
-from battle_ship import CellState, Game, GameError, Player
+from game import CellState, Game, GameError, Player
 
 
 class TestGame:

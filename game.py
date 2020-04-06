@@ -61,7 +61,9 @@ class Game:
         if not self.started:
             raise GameError("Can't iter over not started game")
 
-        return next(self.__next_iter)
+        self.current_move = next(self.__next_iter)
+
+        return self.current_move
 
     def _translate_position(self, position: str) -> int:
         position = position.strip().lower()
