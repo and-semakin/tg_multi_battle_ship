@@ -23,7 +23,7 @@ LETTERS = "абвгдежзик"
 POSITION_PATTERN = r"[" + LETTERS + r"]{1}\d{1,2}"
 
 
-@dataclass
+@dataclass(eq=True, frozen=True)
 class Player:
     id: str
     name: str = "Nameless"

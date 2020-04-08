@@ -1,4 +1,4 @@
-from typing import Dict, List, Tuple
+from typing import Dict, List, Set, Tuple
 
 from game import CellState, Game, Player
 
@@ -11,7 +11,7 @@ class GameMaster:
     def __init__(self) -> None:
         self.games: Dict[str, Game] = {}
         self._moves: Dict[str, Tuple[Player, Player, str]] = {}
-        self._players: Dict[str, List[Player]] = {}
+        self._players: Dict[str, Set[Player]] = {}
 
     def create_game(self, game_id: str) -> None:
         if game_id in self.games:
@@ -28,7 +28,7 @@ class GameMaster:
         if game_id not in self.games:
             raise GameMasterError("Game doesn't exist")
 
-        self._players.setdefault(game_id, []).append(player)
+        self._players.setdefault(game_id, set()).add(player)
 
     def start_game(self, game_id: str) -> None:
         if game_id not in self.games:
@@ -39,7 +39,7 @@ class GameMaster:
         if game.started:
             raise GameMasterError("Game is already started")
 
-        players = self._players.pop(game_id)
+        players = list(self._players.pop(game_id))
 
         game.start(players)
 
