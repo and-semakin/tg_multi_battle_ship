@@ -158,6 +158,9 @@ def handle_message(message: Message) -> None:
     if game_id not in master._moves:
         # attacker request
         master.attack_request(game_id, player, victim, text)
+        bot.reply_to(
+            message, f"Принято, {text.strip().upper()}. Что же там, {victim.name}?"
+        )
     else:
         # victim response
         master.attack_response(game_id, player, STATE_ANSWERS[text])
