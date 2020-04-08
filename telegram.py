@@ -44,6 +44,9 @@ def _next_move(chat_id: int, game_id: str) -> None:
 
 
 def _check_if_message_is_game(message: Message) -> bool:
+    if message.content_type != "text":
+        return False
+
     game_id = _get_game_id(message)
 
     if game_id not in master.games:
