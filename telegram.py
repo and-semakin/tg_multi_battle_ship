@@ -77,7 +77,8 @@ def _check_if_message_is_game(message: Message) -> bool:
         try:
             game._translate_position(text)
         except GameError:
-            return False
+            if text != "/skip":
+                return False
     else:
         # victim response
         if player != victim:
@@ -165,10 +166,14 @@ def handle_message(message: Message) -> None:
 
     if game_id not in master._moves:
         # attacker request
-        master.attack_request(game_id, player, victim, text)
-        bot.reply_to(
-            message, f"Принято, {text.strip().upper()}. Что же там, {victim.name}?"
-        )
+        if text == "/skip":
+            master.skip_move(game_id)
+            _next_move(message.chat.id, game_id)
+        else:
+            master.attack_request(game_id, player, victim, text)
+            bot.reply_to(
+                message, f"Принято, {text.strip().upper()}. Что же там, {victim.name}?"
+            )
     else:
         # victim response
         master.attack_response(game_id, player, STATE_ANSWERS[text])

@@ -76,3 +76,14 @@ class GameMaster:
             raise GameMasterError("It's not your turn")
 
         self.games[game_id].attack(victim, position, new_state)
+
+    def skip_move(self, game_id: str) -> None:
+        if game_id not in self.games:
+            raise GameMasterError("Game doesn't exist")
+
+        game = self.games[game_id]
+
+        if not game.started:
+            raise GameMasterError("Game is not started yet")
+
+        game.current_move = game._next_player_move()
