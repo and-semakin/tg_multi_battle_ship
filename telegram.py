@@ -89,7 +89,7 @@ def _check_if_message_is_game(message: Message) -> bool:
     return True
 
 
-@bot.message_handler(commands=["create_game"])
+@bot.message_handler(commands=["create"])
 def create_game(message: Message) -> None:
     game_id = _get_game_id(message)
     try:
@@ -101,13 +101,13 @@ def create_game(message: Message) -> None:
             message,
             (
                 "Начинаем играть в морской бой! Теперь рисуйте квадраты и расставляйте корабли! "
-                "Все, кто хочет участвовать в игре, отправьте команду /join_game!"
+                "Все, кто хочет участвовать в игре, отправьте команду /join!"
             ),
         )
 
 
-@bot.message_handler(commands=["join_game"])
-def create_game(message: Message) -> None:
+@bot.message_handler(commands=["join"])
+def join_game(message: Message) -> None:
     game_id = _get_game_id(message)
     player = _get_sender_player(message)
     try:
@@ -120,7 +120,7 @@ def create_game(message: Message) -> None:
         )
 
 
-@bot.message_handler(commands=["start_game"])
+@bot.message_handler(commands=["start"])
 def start_game(message: Message) -> None:
     game_id = _get_game_id(message)
     try:
@@ -128,8 +128,10 @@ def start_game(message: Message) -> None:
     except (GameMasterError, GameError) as e:
         bot.send_message(message.chat.id, str(e))
     else:
-        players = master.games[game_id].players
-        players = [f"{i}. {p.name}" for i, p in enumerate(players, start=1)]
+        players = [
+            f"{i}. {p.name}"
+            for i, p in enumerate(master.games[game_id].players, start=1)
+        ]
         bot.reply_to(
             message, "Игра началась!",
         )
@@ -139,7 +141,7 @@ def start_game(message: Message) -> None:
         _next_move(message.chat.id, game_id)
 
 
-@bot.message_handler(commands=["cancel_game"])
+@bot.message_handler(commands=["cancel"])
 def cancel_game(message: Message) -> None:
     game_id = _get_game_id(message)
     try:
