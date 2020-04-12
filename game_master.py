@@ -39,7 +39,7 @@ class GameMaster:
         if game.started:
             raise GameMasterError("Game is already started")
 
-        players = list(self._players.pop(game_id))
+        players = list(self._players.pop(game_id, []))
 
         game.start(players)
 
@@ -53,8 +53,8 @@ class GameMaster:
 
         if not game.started:
             raise GameMasterError("Game is not started yet")
-
-        if game.current_move != (attacker, victim):
+        expected_attacker, expected_victim, _ = game.current_move
+        if (expected_attacker, expected_victim) != (attacker, victim):
             raise GameMasterError("It's not your turn")
 
         self._moves[game_id] = (attacker, victim, position)

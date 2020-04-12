@@ -39,8 +39,14 @@ def _get_sender_player(message: Message) -> Player:
 
 def _next_move(chat_id: int, game_id: str) -> None:
     game = master.games[game_id]
-    attacker, victim = next(game)
-    bot.send_message(chat_id, f"{attacker.name} ходит на {victim.name}...")
+    attacker, victim, number = game.current_move
+    if number > 1:
+        bot.send_message(
+            chat_id, f"{attacker.name} ходит на {victim.name} {number} раз..."
+        )
+
+    else:
+        bot.send_message(chat_id, f"{attacker.name} ходит на {victim.name}...")
 
 
 def _check_if_message_is_game(message: Message) -> bool:
@@ -60,7 +66,7 @@ def _check_if_message_is_game(message: Message) -> bool:
     if player not in game.players:
         return False
 
-    attacker, victim = game.current_move
+    attacker, victim, _ = game.current_move
     text = message.text.strip().lower()
 
     if game_id not in master._moves:
@@ -152,7 +158,7 @@ def handle_message(message: Message) -> None:
     player = _get_sender_player(message)
     game = master.games[game_id]
 
-    attacker, victim = game.current_move
+    attacker, victim, _ = game.current_move
     text = message.text.strip().lower()
 
     if game_id not in master._moves:
